@@ -33,3 +33,16 @@ export function getProjectList(): Promise<{ [key: string]: string }> {
     });
   });
 }
+
+export function cloneRepo(name: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    exec(`fgh clone "${name}"`, (err) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+
+      resolve();
+    });
+  });
+}
