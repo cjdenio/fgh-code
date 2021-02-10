@@ -23,15 +23,14 @@ export function activate(context: ExtensionContext) {
   let disposable = commands.registerCommand(
     "fgh-code.openProject",
     async () => {
-      const projects = await getProjectList();
-
-      const text = await vsCodeWindow.showQuickPick(Object.keys(projects));
-
-      if (!text) {
-        return;
-      }
-
       try {
+        const projects = await getProjectList();
+
+        const text = await vsCodeWindow.showQuickPick(Object.keys(projects));
+
+        if (!text) {
+          return;
+        }
         await commands.executeCommand(
           "vscode.openFolder",
           Uri.file(projects[text])
@@ -43,7 +42,6 @@ export function activate(context: ExtensionContext) {
           "Install fgh"
         );
         if (clicked == "Install fgh") {
-          console.log("installing fgh");
           env.openExternal(
             Uri.parse("https://github.com/Matt-Gleich/fgh#readme")
           );
