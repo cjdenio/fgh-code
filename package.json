@@ -1,7 +1,13 @@
 {
   "name": "fgh-code",
-  "displayName": "fgh-code",
+  "publisher": "CalebDenio",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cjdenio/fgh-code"
+  },
+  "displayName": "fgh",
   "description": "",
+  "icon": "images/fgh-logo.png",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.53.0"
