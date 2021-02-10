@@ -38,7 +38,7 @@ export function activate(context: ExtensionContext) {
       } catch (err) {
         console.error(err);
         const clicked = await vsCodeWindow.showErrorMessage(
-          `error opening project: ${err.message}`,
+          `something went wrong: ${err.message}`,
           "Install fgh"
         );
         if (clicked == "Install fgh") {
