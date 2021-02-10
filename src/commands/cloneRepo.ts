@@ -47,6 +47,8 @@ export default async () => {
     return;
   }
 
+  await commands.executeCommand("fgh-code.refreshSidebar");
+
   const openResponse = await vsCodeWindow.showInformationMessage(
     `Successfully cloned ${text}!`,
     "Open repository"

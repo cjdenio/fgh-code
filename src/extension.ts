@@ -1,9 +1,12 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-import { commands, ExtensionContext } from "vscode";
+import { commands, ExtensionContext, window as vsCodeWindow } from "vscode";
 
 import openProject from "./commands/openProject";
 import cloneRepo from "./commands/cloneRepo";
+
+import FghProjectsProvider from "./projectsProvider";
+import refreshSidebar from "./commands/refreshSidebar";
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -15,6 +18,8 @@ export function activate(context: ExtensionContext) {
   // The command has been defined in the package.json file
   // Now provide the implementation of the command with registerCommand
   // The commandId parameter must match the command field in package.json
+  const projectsProvider = new FghProjectsProvider();
+
   context.subscriptions.push(
     commands.registerCommand("fgh-code.openProject", openProject)
   );
@@ -22,6 +27,28 @@ export function activate(context: ExtensionContext) {
   context.subscriptions.push(
     commands.registerCommand("fgh-code.cloneRepo", cloneRepo)
   );
+
+  context.subscriptions.push(
+    commands.registerCommand(
+      "fgh-code.refreshSidebar",
+      refreshSidebar(projectsProvider)
+    )
+  );
+
+  // context.subscriptions.push(
+  //   vsCodeWindow.registerTreeDataProvider(
+  //     "fgh-projects",
+  //     new FghProjectsProvider()
+  //   )
+  // );
+
+  const projectsTreeView = vsCodeWindow.createTreeView("fgh-projects", {
+    treeDataProvider: projectsProvider,
+  });
+
+  context.subscriptions.push(projectsTreeView);
+
+  projectsTreeView.description = "hi there!";
 }
 
 // this method is called when your extension is deactivated

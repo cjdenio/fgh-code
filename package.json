@@ -17,10 +17,31 @@
   ],
   "activationEvents": [
     "onCommand:fgh-code.openProject",
-    "onCommand:fgh-code.cloneRepo"
+    "onCommand:fgh-code.cloneRepo",
+    "onCommand:fgh-code.refreshSidebar",
+    "onView:fgh-projects"
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "fgh",
+      "properties": {
+        "fgh-code.promptOnOpen": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether or not to prompt when opening a project from the sidebar"
+        }
+      }
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "fgh",
+          "title": "fgh",
+          "icon": "images/tree-view.svg"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "fgh-code.openProject",
@@ -28,9 +49,45 @@
       },
       {
         "command": "fgh-code.cloneRepo",
-        "title": "fgh: Clone repository"
+        "title": "fgh: Clone repository",
+        "icon": {
+          "dark": "images/icons/cloud-download-dark.svg",
+          "light": "images/icons/cloud-download-light.svg"
+        }
+      },
+      {
+        "command": "fgh-code.refreshSidebar",
+        "title": "fgh: Refresh sidebar",
+        "icon": {
+          "dark": "images/icons/refresh-dark.svg",
+          "light": "images/icons/refresh-light.svg"
+        }
       }
-    ]
+    ],
+    "views": {
+      "fgh": [
+        {
+          "id": "fgh-projects",
+          "name": "Projects",
+          "icon": "images/tree-view.svg",
+          "contextualTitle": "fgh"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "fgh-code.refreshSidebar",
+          "group": "navigation",
+          "when": "view == fgh-projects"
+        },
+        {
+          "command": "fgh-code.cloneRepo",
+          "group": "navigation",
+          "when": "view == fgh-projects"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run compile",

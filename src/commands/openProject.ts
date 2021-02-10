@@ -1,9 +1,28 @@
-import { commands, env, Uri, window as vsCodeWindow } from "vscode";
+import { commands, env, Uri, window as vsCodeWindow, workspace } from "vscode";
 
 import { getProjectList } from "../fgh";
 
-export default async () => {
+export default async (project?: { name: string; path: Uri }) => {
   try {
+    if (project) {
+      const prompt = workspace.getConfiguration("fgh-code").get("promptOnOpen");
+
+      if (prompt) {
+        const response = await vsCodeWindow.showInformationMessage(
+          `Open project ${project.name}?`,
+          "Open",
+          "Cancel"
+        );
+
+        if (response == "Open") {
+          await commands.executeCommand("vscode.openFolder", project.path);
+        }
+      } else {
+        await commands.executeCommand("vscode.openFolder", project.path);
+      }
+
+      return;
+    }
     const projects = await getProjectList();
 
     const text = await vsCodeWindow.showQuickPick(Object.keys(projects));
