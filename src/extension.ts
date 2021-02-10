@@ -8,7 +8,7 @@ import {
   ExtensionContext,
 } from "vscode";
 
-import { getProjectList, getProjectPath } from "./fgh";
+import { getProjectList } from "./fgh";
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
