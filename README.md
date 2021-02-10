@@ -1,6 +1,6 @@
 # fgh-code
 
-This VS Code extensions lets you easily manage your [fgh](https://github.com/Matt-Gleich/fgh) repositories!
+This VS Code extension lets you easily manage your [fgh](https://github.com/Matt-Gleich/fgh) repositories!
 
 ## Features
 
