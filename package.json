@@ -24,11 +24,11 @@
     "commands": [
       {
         "command": "fgh-code.openProject",
-        "title": "Open fgh project"
+        "title": "fgh: Open project"
       },
       {
         "command": "fgh-code.cloneRepo",
-        "title": "Clone repository"
+        "title": "fgh: Clone repository"
       }
     ]
   },
