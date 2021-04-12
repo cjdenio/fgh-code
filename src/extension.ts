@@ -35,20 +35,11 @@ export function activate(context: ExtensionContext) {
     )
   );
 
-  // context.subscriptions.push(
-  //   vsCodeWindow.registerTreeDataProvider(
-  //     "fgh-projects",
-  //     new FghProjectsProvider()
-  //   )
-  // );
-
   const projectsTreeView = vsCodeWindow.createTreeView("fgh-projects", {
     treeDataProvider: projectsProvider,
   });
 
   context.subscriptions.push(projectsTreeView);
-
-  projectsTreeView.description = "hi there!";
 }
 
 // this method is called when your extension is deactivated

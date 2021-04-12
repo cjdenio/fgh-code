@@ -11,10 +11,17 @@ export default async (project?: { name: string; path: Uri }) => {
         const response = await vsCodeWindow.showInformationMessage(
           `Open project ${project.name}?`,
           "Open",
+          "Open, don't prompt again",
           "Cancel"
         );
 
-        if (response == "Open") {
+        if (response == "Open" || response == "Open, don't prompt again") {
+          if (response == "Open, don't prompt again") {
+            await workspace
+              .getConfiguration("fgh-code")
+              .update("promptOnOpen", false, true);
+          }
+
           await commands.executeCommand("vscode.openFolder", project.path);
         }
       } else {
